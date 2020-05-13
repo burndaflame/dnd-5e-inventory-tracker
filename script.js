@@ -194,10 +194,6 @@
 		electrum = isNaN(electrum) ? 0 : electrum;
 		gold = isNaN(gold) ? 0 : gold;
 		platinum = isNaN(platinum) ? 0 : platinum;
-
-		var subtotal = (copper + silver + electrum + gold + platinum) / 50;
-		subtotal = parseFloat(subtotal.toFixed(2));
-		$(".inventory__money--subtotal--field").val(subtotal + $(".inventory__money--subtotal--field").data("unit"));
 	}
 
 	function calculateTotal() {
