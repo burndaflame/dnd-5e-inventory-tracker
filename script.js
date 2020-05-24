@@ -54,6 +54,29 @@
     $("html, body").animate({scrollTop: $(document).height()});
   }
 
+  function uploadSave() {
+    var fileInput = $("<input />");
+    fileInput.attr("type", "file");
+    fileInput.attr("accept", "application/json");
+    fileInput.attr("multiple", false);
+    fileInput[0].click();
+
+
+    fileInput.change(function(){
+      var files = fileInput[0].files;
+
+      if(files.length <= 0) {return false;}
+
+      var fr = new FileReader();
+      fr.onload = function(e) {
+        var result = JSON.parse(e.target.result);
+        loadValues(result);
+      }
+
+      fr.readAsText(files.item(0));
+    });
+  }
+
   /**
    * Load the values from the URL query parameters or history state.
    */
@@ -86,10 +109,7 @@
     calculate();
   }
 
-  /**
-   * Save the values to the URL query parameters and history state.
-   */
-  function saveValues() {
+  function getSaveData() {
     var saveData = {};
     saveData.strength = $("#character__score").val();
     saveData.sizeMultiplier = $("#character__size-multiplier").val();
@@ -124,8 +144,42 @@
     saveData.money.gold = $(".inventory__money--gold--field").val();
     saveData.money.platinum = $(".inventory__money--platinum--field").val();
 
-    var saveDataEncoded = encodeURIComponent(JSON.stringify(saveData));
+    return saveData;
+  }
+
+  /**
+   * Save the values to the URL query parameters and history state.
+   /
+  function saveValues() {
+    var saveData = getSaveData();
+    var json = JSON.stringify(saveData);
+    var saveDataEncoded = encodeURIComponent(json);
     history.pushState(saveData, "", "?data=" + saveDataEncoded);
+  }*/
+
+  function saveToFile() {
+    var saveData = getSaveData();
+    var json = JSON.stringify(saveData);
+
+    //Convert JSON string to BLOB.
+    json = [json];
+    var blob1 = new Blob(json, { type: "text/plain;charset=utf-8" });
+
+    //Check the Browser.
+    var isIE = false || !!document.documentMode;
+
+    const fileName = "inventory.json";
+
+    if (isIE) {
+      window.navigator.msSaveBlob(blob1, fileName);
+    } else {
+      var url = window.URL || window.webkitURL;
+      link = url.createObjectURL(blob1);
+      var a = $("<a />");
+      a.attr("download", fileName);
+      a.attr("href", link);
+      a[0].click();
+    }
   }
 
   function addInventoryItem() {
@@ -351,7 +405,8 @@
     $(".inventory__controls--move-up").on("click submit", moveActiveItemUp);
     $(".inventory__controls--move-down").on("click submit", moveActiveItemDown);
     $(".inventory__controls--remove-row").on("click submit", removeActiveItem);
-    $(".inventory__controls--save").on("click submit", saveValues);
+    $(".inventory__controls--save").on("click submit", saveToFile);
+    $(".inventory__controls--load").on("click submit", uploadSave);
 
     calculate();
   });
