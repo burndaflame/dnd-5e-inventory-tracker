@@ -13,7 +13,7 @@
 			<div class="row">
 				<div class="character__score">
 					<label for="character__score" class="character__score--label label">Strength</label>
-					<input id="character__score" class="character__score--field field" type="number" min="1" max="30" required placeholder="STR" value="10" />
+					<input id="character__score" class="character__score--field field" type="number" min="1" step="1" max="30" required placeholder="STR" value="10" />
 				</div>
 
 				<div class="character__size-multiplier">
@@ -60,13 +60,13 @@
 
 				<div class="inventory__item--weight">
 					<label class="inventory__item--weight--label label">Weight</label>
-					<input class="inventory__item--weight--field field" type="number" min="0" max="1000" placeholder="Weight" />
+					<input class="inventory__item--weight--field field" type="number" min="0" step="0.05" max="1000" placeholder="Weight" />
 					<span class="inventory__item--weight--unit">lb.</span>
 				</div>
 
 				<div class="inventory__item--quantity">
 					<label class="inventory__item--quantity--label label">Quantity</label>
-					<input class="inventory__item--quantity--field field" type="number" min="0" max="100" placeholder="Qty" />
+					<input class="inventory__item--quantity--field field" type="number" min="0" step="1" max="100" placeholder="Qty" />
 					<span class="inventory__item--quantity--unit">×</span>
 				</div>
 
@@ -78,27 +78,27 @@
 
 			<div class="inventory__money row">
 				<div class="inventory__money--copper">
-					<input class="inventory__money--copper--field field" type="number" min="0" placeholder="CP" />
+					<input class="inventory__money--copper--field field" type="number" min="0" step="1" placeholder="CP" />
 					<label class="inventory__money--copper--unit unit">CP</label>
 				</div>
 
 				<div class="inventory__money--silver">
-					<input class="inventory__money--silver--field field" type="number" min="0" placeholder="SP" />
+					<input class="inventory__money--silver--field field" type="number" min="0" step="1" placeholder="SP" />
 					<label class="inventory__money--silver--unit unit">SP</label>
 				</div>
 
 				<div class="inventory__money--electrum">
-					<input class="inventory__money--electrum--field field" type="number" min="0" placeholder="EP" />
+					<input class="inventory__money--electrum--field field" type="number" min="0" step="1" placeholder="EP" />
 					<label class="inventory__money--electrum--unit unit">EP</label>
 				</div>
 
 				<div class="inventory__money--gold">
-					<input class="inventory__money--gold--field field" type="number" min="0" placeholder="GP" />
+					<input class="inventory__money--gold--field field" type="number" min="0" pstep="1" laceholder="GP" />
 					<label class="inventory__money--gold--unit unit">GP</label>
 				</div>
 
 				<div class="inventory__money--platinum">
-					<input class="inventory__money--platinum--field field" type="number" min="0" placeholder="PP" />
+					<input class="inventory__money--platinum--field field" type="number" min="0" pstep="1" laceholder="PP" />
 					<label class="inventory__money--platinum--unit unit">PP</label>
 				</div>
 			</div>
