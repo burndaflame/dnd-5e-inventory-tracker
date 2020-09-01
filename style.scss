@@ -19,6 +19,7 @@ $color-item-active: rgba(#FFFF00, 0.5);
 
 $header-height: 4rem;
 $inventory-header-height: 1.875rem;
+$inventory-height: 75vh;
 $money-height: 2.194444rem;
 $controls-height: (8rem / 3) - 0.5rem;
 $footer-height: 4rem;
@@ -147,7 +148,10 @@ body {
 
 .inventory {
 	padding-top: $inventory-header-height;
-	padding-bottom: $controls-height + $money-height;
+	height: $inventory-height;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	
 	@extend %clearfix;
 
 	&__header,
